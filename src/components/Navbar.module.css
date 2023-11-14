@@ -1,0 +1,15 @@
+.navbar {
+    background-color: #4B5563; /* This is Tailwind's gray-700 */
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .navItem {
+    margin-right: 1rem;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navItem:hover {
+    color: rgb(138, 154, 205); /* This is Tailwind's gray-400 */
+  }

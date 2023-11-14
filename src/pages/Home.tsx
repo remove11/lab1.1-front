@@ -1,9 +1,20 @@
+import styles from './Style/Style.module.css';
+
 const Home = () => {
     return (
-        <h1 className="text-3xl font-bold underline text-yellow-800 hello">
-        Home Pange
-      </h1>
+        <div className={styles.Container}>
+            <h1 className={styles.Title}>Home Page</h1>
+            <h4>Bare minimum, done!</h4>
+
+            <div className={styles.ContainerB}>
+            <button className={styles.Button}>Login</button>
+            <button className={styles.Button}>Register</button>
+            
+            </div>
+       
+            
+        </div>
     )
 }
 
-export default Home
+export default Home;

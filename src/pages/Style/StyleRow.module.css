@@ -1,0 +1,21 @@
+.Row {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #58595a; 
+    border-radius: 0.375rem; 
+    width: 300px;
+    text-align: center;
+  }
+  
+  .Title {
+    font-size: 1.125rem; 
+    font-weight: 600; 
+  }
+  
+  .Details {
+    font-size: 1rem; 
+  }
+  
+  .Date {
+    font-size: 0.875rem; 
+  }
