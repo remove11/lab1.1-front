@@ -1,15 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
-import Encounter from "./pages/Encounter/Encounter";
+import Login from "./pages/login";
+import Register from "./pages/Register";
+import Patient from "./pages/Patient";
 import Layout from "./components/Layout";
-import MedicalCondition from "./pages/MedicalCondition/MedicalCondition";
-import Message from "./pages/Message/Message";
+import PatientEncounter from "./pages/PatientEncounter";
+import PatientObservation from "./pages/PatientObservation";
+import PatientMessage from "./pages/PatientMessage";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Layout />,
+        //element: <Layout />,
         //errorElement: <ErrorPage />,
 
         children: [
@@ -18,17 +21,37 @@ export const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'encounter',
-                element: <Encounter />
+                path: 'login',
+                element: <Login />
             },
             {
-                path: 'medicalCondition',
-                element: <MedicalCondition />
-            },
-            {
-                path: 'message',
-                element: <Message />
+                path: 'register',
+                element: <Register />
             }
+        ]
+    },
+    {
+        path: "/app",
+        element: <Layout />,
+        //errorElement: <ErrorPage />,
+        children: [
+            {
+                path: 'patients',
+                element: <Patient />
+            },
+            {
+                path: 'user/encounters',
+                element: <PatientEncounter />
+            },
+            {
+                path: 'user/observations',
+                element: <PatientObservation />
+            },
+            {
+                path: 'user/messages',
+                element: <PatientMessage />
+            },
+           
         ]
     },
 ]);
