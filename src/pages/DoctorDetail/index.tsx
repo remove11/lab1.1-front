@@ -5,15 +5,15 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { Link, useParams } from 'react-router-dom';
-import { IPatient, getPatientDetail } from '../../axios/patients';
 import { IMessage, IMessageCreate, createMessage, getConversation } from '../../axios/mesage';
 import { useAuth } from '../../context/UserContext';
 import { convertDate } from '../../utils';
+import { IDoctor, getDoctorDetail } from '../../axios/doctors';
 
 
-const PatientMessage: React.FC = () => {
+const DoctorDetail: React.FC = () => {
     const {userId} = useParams()
-    const [userDetail, setUserDetail] = useState<IPatient|null>(null)
+    const [userDetail, setUserDetail] = useState<IDoctor|null>(null)
     const [message, setMessage] = useState<IMessage[]|null>(null)
     const {user,setUser} = useAuth();
     const [newMsg, setNewMsg] = useState<String>("")
@@ -24,7 +24,7 @@ const PatientMessage: React.FC = () => {
             console.log("Opps...1")
             return
         }
-        getPatientDetail(userId).then(userD => {
+        getDoctorDetail(userId).then(userD => {
             setUserDetail(userD)
         })
 
@@ -38,6 +38,8 @@ const PatientMessage: React.FC = () => {
                 console.log("Opps...3")
                 return;
             }
+
+            console.log(m)
             setMessage(m)
         })
     },[])
@@ -60,13 +62,6 @@ const PatientMessage: React.FC = () => {
             }
             setMessage(m)
         })
-
-        const input:HTMLInputElement|null = document.getElementById("input123") as HTMLInputElement;
-
-        if(input == null)
-            return;
-        input.value = ""
-
     }
 
   return (
@@ -76,7 +71,7 @@ const PatientMessage: React.FC = () => {
                 <div className='flex'>
                     <div className={`flex py-9 ml-9 px-3`}>
                         <FontAwesomeIcon icon={faHospitalUser} size='xl' color="#3260FC"/>
-                        <p className={`text-[#3260FC] text-xl ml-4`}>Patient details</p>
+                        <p className={`text-[#3260FC] text-xl ml-4`}>Doctor details</p>
                     </div>
                 </div>
             </div>
@@ -85,7 +80,7 @@ const PatientMessage: React.FC = () => {
                     <div className='flex flex-col items-center max-w-sm bg-white p-10'>
                         <FontAwesomeIcon icon={faCircleUser} size='5x' color='#6E6E6E'/>
                         <p className='font-medium mt-4'>{userDetail == null ? "Loading..." : userDetail.lastname + " " + userDetail.surename}</p>
-                        <p className='text-[#6E6E6E] mb-10'>Patient</p>
+                        <p className='text-[#6E6E6E] mb-10'>Doctor</p>
                         <div>
                             <div className='flex items-center'>
                                 <FontAwesomeIcon icon={faEnvelope} color='#6E6E6E' size='lg'/>
@@ -107,18 +102,6 @@ const PatientMessage: React.FC = () => {
                                 <div className='flex items-center'>
                                     <FontAwesomeIcon icon={faComment} color='#6E6E6E' size='lg'/>
                                     <p className='text-black ml-3 font-semibold'>Send message</p>
-                                </div>
-                            </Link>
-                            <Link to={"/app/"+userId+"/encounters"}>
-                                <div className='flex items-center mt-4'>
-                                    <FontAwesomeIcon icon={faHospitalUser} color='#6E6E6E' size='lg'/>
-                                    <p className='text-[#6E6E6E] ml-3'>Encounters</p>
-                                </div>
-                            </Link>
-                            <Link to={"/app/"+userId+"/conditions"}>
-                                <div className='flex items-center mt-4'>
-                                    <FontAwesomeIcon icon={faLocationDot} color='#6E6E6E' size='lg'/>
-                                    <p className='text-[#6E6E6E] ml-3'>Conditions</p>
                                 </div>
                             </Link>
                         </div>
@@ -151,7 +134,7 @@ const PatientMessage: React.FC = () => {
                     </div>
                     <div className='px-10'>
                         <div className='flex w-full bg-white py-3 px-4 rounded-full shadow-lg items-center my-7'>
-                            <input id='input123' className='border-transparent focus:border-transparent focus:ring-0 focus:outline-none w-full' placeholder='Message'  onChange={(e:ChangeEvent<HTMLInputElement>) => setNewMsg(e.target.value)}/>
+                            <input className='border-transparent focus:border-transparent focus:ring-0 focus:outline-none w-full' placeholder='Message'  onChange={(e:ChangeEvent<HTMLInputElement>) => setNewMsg(e.target.value)}/>
                             <FontAwesomeIcon icon={faPaperPlane} color='#6E6E6E' onClick={onMessagePost}/>
                         </div>
                     </div>
@@ -162,4 +145,4 @@ const PatientMessage: React.FC = () => {
   )
 }
 
-export default PatientMessage;
+export default DoctorDetail;

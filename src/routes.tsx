@@ -7,14 +7,17 @@ import Layout from "./components/Layout";
 import PatientEncounter from "./pages/PatientEncounter";
 import PatientObservation from "./pages/PatientObservation";
 import PatientMessage from "./pages/PatientMessage";
+import Doctor from "./pages/doctor";
+import DoctorCreate from "./pages/DoctorCreate";
+import Staff from "./pages/Staff";
+import StaffCreate from "./pages/StaffCreate";
+import PatientCondition from "./pages/PatientCondition";
+import DoctorDetail from "./pages/DoctorDetail";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        //element: <Layout />,
-        //errorElement: <ErrorPage />,
-
         children: [
             {
                 path: '',
@@ -33,25 +36,47 @@ export const router = createBrowserRouter([
     {
         path: "/app",
         element: <Layout />,
-        //errorElement: <ErrorPage />,
         children: [
             {
                 path: 'patients',
                 element: <Patient />
             },
             {
-                path: 'user/encounters',
+                path: 'doctors',
+                element: <Doctor />
+            },
+            {
+                path: 'staff',
+                element: <Staff />
+            },
+            {
+                path: 'create-doctor',
+                element: <DoctorCreate />
+            },
+            {
+                path: 'create-staff',
+                element: <StaffCreate />
+            },
+            {
+                path: ':userId/encounters',
                 element: <PatientEncounter />
             },
             {
-                path: 'user/observations',
+                path: 'doctor/:userId',
+                element: <DoctorDetail />
+            },
+            {
+                path: ':userId/conditions',
+                element: <PatientCondition />
+            },
+            {
+                path: ':userId/:encounterId/observations',
                 element: <PatientObservation />
             },
             {
-                path: 'user/messages',
+                path: ':userId/messages',
                 element: <PatientMessage />
             },
-           
         ]
     },
 ]);
